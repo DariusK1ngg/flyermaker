@@ -110,11 +110,10 @@ export const PredefinedCatalogModal: React.FC<PredefinedCatalogModalProps> = ({
         </div>
 
         {/* Products Grid */}
-        <div style={{
+        <div className="catalog-products-grid" style={{
           padding: '1.5rem',
           overflowY: 'auto',
           display: 'grid',
-          gridTemplateColumns: 'repeat(auto-fill, minmax(180px, 1fr))',
           gap: '1rem',
           flex: 1
         }}>

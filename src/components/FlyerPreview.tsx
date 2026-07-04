@@ -84,18 +84,6 @@ export const FlyerPreview = forwardRef<HTMLDivElement, FlyerPreviewProps>(({ pro
     <div 
       ref={containerRef} 
       className="flyer-preview-wrapper"
-      style={{
-        position: 'relative',
-        flex: 1,
-        display: 'flex',
-        alignItems: 'center',
-        justifyContent: 'center',
-        overflow: 'auto',
-        padding: '1.5rem',
-        minHeight: 0,
-        width: '100%',
-        height: '100%'
-      }}
     >
       {/* Floating Zoom Controls (Premium Obsidian styling) */}
       <div style={{

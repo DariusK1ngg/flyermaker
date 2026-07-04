@@ -66,9 +66,7 @@ export const EditorPanel: React.FC<EditorPanelProps> = ({
   };
 
   return (
-    <aside style={{
-      width: '420px',
-      minWidth: '380px',
+    <aside className="editor-sidebar" style={{
       backgroundColor: 'var(--bg-panel)',
       borderRight: '1px solid rgba(255,255,255,0.08)',
       display: 'flex',
