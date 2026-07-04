@@ -153,7 +153,12 @@ export const PredefinedCatalogModal: React.FC<PredefinedCatalogModalProps> = ({
                     <button
                       onClick={(e) => {
                         e.stopPropagation();
-                        onDeleteProduct(product.id);
+                        const confirmDelete = window.confirm(
+                          `¿Estás seguro de que deseas eliminar "${product.name}" de tu catálogo?`
+                        );
+                        if (confirmDelete) {
+                          onDeleteProduct(product.id);
+                        }
                       }}
                       title="Eliminar de Neon DB"
                       style={{
