@@ -26,6 +26,12 @@ export const EditorPanel: React.FC<EditorPanelProps> = ({
   onOpenCustomModal
 }) => {
   const [activeTab, setActiveTab] = useState<TabType>('products');
+  const [isMobileOpen, setIsMobileOpen] = useState(false);
+
+  const handleTabClick = (tab: TabType) => {
+    setActiveTab(tab);
+    setIsMobileOpen(true);
+  };
 
   // Remove a product from the current flyer
   const handleRemoveProduct = (id: string) => {
@@ -77,28 +83,28 @@ export const EditorPanel: React.FC<EditorPanelProps> = ({
       {/* Navigation Tabs */}
       <div className="editor-tabs-header">
         <button
-          onClick={() => setActiveTab('products')}
+          onClick={() => handleTabClick('products')}
           className={`tab-btn ${activeTab === 'products' ? 'active' : ''}`}
         >
           <ShoppingBag size={18} />
           <span>Productos</span>
         </button>
         <button
-          onClick={() => setActiveTab('style')}
+          onClick={() => handleTabClick('style')}
           className={`tab-btn ${activeTab === 'style' ? 'active' : ''}`}
         >
           <Palette size={18} />
           <span>Diseño</span>
         </button>
         <button
-          onClick={() => setActiveTab('text')}
+          onClick={() => handleTabClick('text')}
           className={`tab-btn ${activeTab === 'text' ? 'active' : ''}`}
         >
           <Type size={18} />
           <span>Textos</span>
         </button>
         <button
-          onClick={() => setActiveTab('duration')}
+          onClick={() => handleTabClick('duration')}
           className={`tab-btn ${activeTab === 'duration' ? 'active' : ''}`}
         >
           <Clock size={18} />
@@ -107,7 +113,24 @@ export const EditorPanel: React.FC<EditorPanelProps> = ({
       </div>
 
       {/* Tab Content */}
-      <div style={{ flex: 1, overflowY: 'auto', padding: '1.25rem' }}>
+      <div className={`editor-tab-content-wrapper ${isMobileOpen ? 'mobile-open' : ''}`} style={{ flex: 1, overflowY: 'auto', padding: '1.25rem' }}>
+        {/* Mobile bottom sheet header */}
+        <div className="mobile-sheet-header">
+          <span className="mobile-sheet-title">
+            {activeTab === 'products' && '🛒 Editar Productos'}
+            {activeTab === 'style' && '🎨 Editar Diseño'}
+            {activeTab === 'text' && '✍️ Editar Textos'}
+            {activeTab === 'duration' && '⏱️ Editar Validez'}
+          </span>
+          <button 
+            type="button" 
+            onClick={() => setIsMobileOpen(false)}
+            className="btn-primary"
+            style={{ padding: '4px 12px', fontSize: '0.85rem', borderRadius: '10px', boxShadow: 'none' }}
+          >
+            Listo
+          </button>
+        </div>
         
         {/* TAB 1: PRODUCTOS */}
         {activeTab === 'products' && (
