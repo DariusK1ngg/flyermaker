@@ -141,7 +141,7 @@ export const EditorPanel: React.FC<EditorPanelProps> = ({
                 className="btn-primary"
                 style={{ width: '100%', justifyContent: 'center', padding: '0.8rem' }}
               >
-                <ShoppingBag size={18} /> + Abrir Catálogo de Productos Preestablecidos
+                <ShoppingBag size={18} /> + Abrir Catálogo de Productos
               </button>
               <button
                 onClick={() => onOpenCustomModal()}

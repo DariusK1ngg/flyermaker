@@ -67,7 +67,7 @@ export const PredefinedCatalogModal: React.FC<PredefinedCatalogModalProps> = ({
         }}>
           <div>
             <h2 style={{ fontSize: '1.4rem', fontWeight: 800, color: 'white', display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
-              <ShoppingBag className="text-accent" /> Catálogo de Productos Preestablecidos
+              <ShoppingBag className="text-accent" /> Catálogo de Productos
             </h2>
             <p style={{ fontSize: '0.85rem', color: '#94a3b8', marginTop: '0.2rem' }}>
               Haz clic en cualquier producto para agregarlo automáticamente a tu flyer de ofertas (Máximo 4)

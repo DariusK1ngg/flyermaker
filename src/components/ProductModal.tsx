@@ -206,7 +206,7 @@ export const ProductModal: React.FC<ProductModalProps> = ({
               type="text"
               value={name}
               onChange={(e) => setName(e.target.value)}
-              placeholder="Ej: AGUACATE HASS"
+              placeholder="Ej: AGUACATE"
               required
               className="form-input"
             />
