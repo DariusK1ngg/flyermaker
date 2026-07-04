@@ -27,7 +27,19 @@ const darkenHexColor = (hex: string, percent: number) => {
 export const FlyerPreview = forwardRef<HTMLDivElement, FlyerPreviewProps>(({ products, config }, ref) => {
   const [scale, setScale] = useState(1);
   const [zoom, setZoom] = useState(1);
+  const [pan, setPan] = useState({ x: 0, y: 0 });
   const containerRef = useRef<HTMLDivElement>(null);
+
+  const touchStartRef = useRef({
+    distance: 0,
+    zoom: 1,
+    x: 0,
+    y: 0,
+    panX: 0,
+    panY: 0,
+    isPinching: false,
+    isPanning: false
+  });
 
   const baseWidth = 540;
   const baseHeight = config.format === 'story' ? 960 : 540;
@@ -39,7 +51,60 @@ export const FlyerPreview = forwardRef<HTMLDivElement, FlyerPreviewProps>(({ pro
   // Zoom control handlers
   const zoomIn = () => setZoom(z => Math.min(z + 0.1, 2.0));
   const zoomOut = () => setZoom(z => Math.max(z - 0.1, 0.4));
-  const resetZoom = () => setZoom(1);
+  const resetZoom = () => {
+    setZoom(1);
+    setPan({ x: 0, y: 0 });
+  };
+
+  const handleTouchStart = (e: React.TouchEvent<HTMLDivElement>) => {
+    if (e.touches.length === 2) {
+      const t1 = e.touches[0];
+      const t2 = e.touches[1];
+      const distance = Math.hypot(t2.clientX - t1.clientX, t2.clientY - t1.clientY);
+      touchStartRef.current = {
+        ...touchStartRef.current,
+        distance,
+        zoom,
+        isPinching: true,
+        isPanning: false
+      };
+    } else if (e.touches.length === 1) {
+      const touch = e.touches[0];
+      touchStartRef.current = {
+        ...touchStartRef.current,
+        x: touch.clientX,
+        y: touch.clientY,
+        panX: pan.x,
+        panY: pan.y,
+        isPinching: false,
+        isPanning: true
+      };
+    }
+  };
+
+  const handleTouchMove = (e: React.TouchEvent<HTMLDivElement>) => {
+    if (e.touches.length === 2 && touchStartRef.current.isPinching) {
+      if (e.cancelable) e.preventDefault();
+      const t1 = e.touches[0];
+      const t2 = e.touches[1];
+      const distance = Math.hypot(t2.clientX - t1.clientX, t2.clientY - t1.clientY);
+      const ratio = distance / touchStartRef.current.distance;
+      setZoom(Math.max(0.4, Math.min(touchStartRef.current.zoom * ratio, 3.0)));
+    } else if (e.touches.length === 1 && touchStartRef.current.isPanning) {
+      const touch = e.touches[0];
+      const dx = touch.clientX - touchStartRef.current.x;
+      const dy = touch.clientY - touchStartRef.current.y;
+      setPan({
+        x: touchStartRef.current.panX + dx,
+        y: touchStartRef.current.panY + dy
+      });
+    }
+  };
+
+  const handleTouchEnd = () => {
+    touchStartRef.current.isPinching = false;
+    touchStartRef.current.isPanning = false;
+  };
 
   // Determine active theme color setup
   let theme: ThemeColor;
@@ -84,24 +149,12 @@ export const FlyerPreview = forwardRef<HTMLDivElement, FlyerPreviewProps>(({ pro
     <div 
       ref={containerRef} 
       className="flyer-preview-wrapper"
+      onTouchStart={handleTouchStart}
+      onTouchMove={handleTouchMove}
+      onTouchEnd={handleTouchEnd}
     >
       {/* Floating Zoom Controls (Premium Obsidian styling) */}
-      <div style={{
-        position: 'absolute',
-        top: '1.25rem',
-        left: '1.25rem',
-        zIndex: 10,
-        display: 'flex',
-        alignItems: 'center',
-        gap: '0.25rem',
-        background: 'rgba(19, 25, 41, 0.85)',
-        backdropFilter: 'blur(12px)',
-        border: '1px solid rgba(255,255,255,0.08)',
-        padding: '4px 8px',
-        borderRadius: '12px',
-        boxShadow: '0 8px 32px rgba(0,0,0,0.4)',
-        userSelect: 'none'
-      }}>
+      <div className="zoom-controls">
         <button 
           onClick={zoomOut} 
           style={{ padding: '4px 8px', fontSize: '0.9rem', border: 'none', background: 'transparent', height: '24px', display: 'flex', alignItems: 'center', cursor: 'pointer', color: '#cbd5e1' }}
@@ -139,9 +192,9 @@ export const FlyerPreview = forwardRef<HTMLDivElement, FlyerPreviewProps>(({ pro
         margin: 'auto'
       }}>
         <div style={{
-          transform: `scale(${scale * zoom})`,
+          transform: `translate(${pan.x}px, ${pan.y}px) scale(${scale * zoom})`,
           transformOrigin: 'center center',
-          transition: 'transform 0.15s cubic-bezier(0.2, 0.8, 0.2, 1)',
+          transition: touchStartRef.current.isPinching || touchStartRef.current.isPanning ? 'none' : 'transform 0.15s cubic-bezier(0.2, 0.8, 0.2, 1)',
           display: 'flex',
           alignItems: 'center',
           justifyContent: 'center',

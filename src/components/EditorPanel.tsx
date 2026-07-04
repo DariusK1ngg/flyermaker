@@ -75,18 +75,10 @@ export const EditorPanel: React.FC<EditorPanelProps> = ({
       overflow: 'hidden'
     }}>
       {/* Navigation Tabs */}
-      <div style={{
-        display: 'grid',
-        gridTemplateColumns: 'repeat(4, 1fr)',
-        gap: '4px',
-        padding: '0.75rem',
-        backgroundColor: 'rgba(15, 23, 42, 0.4)',
-        borderBottom: '1px solid rgba(255,255,255,0.06)'
-      }}>
+      <div className="editor-tabs-header">
         <button
           onClick={() => setActiveTab('products')}
           className={`tab-btn ${activeTab === 'products' ? 'active' : ''}`}
-          style={{ flexDirection: 'column', padding: '0.6rem 0.2rem', gap: '4px', fontSize: '0.75rem' }}
         >
           <ShoppingBag size={18} />
           <span>Productos</span>
@@ -94,7 +86,6 @@ export const EditorPanel: React.FC<EditorPanelProps> = ({
         <button
           onClick={() => setActiveTab('style')}
           className={`tab-btn ${activeTab === 'style' ? 'active' : ''}`}
-          style={{ flexDirection: 'column', padding: '0.6rem 0.2rem', gap: '4px', fontSize: '0.75rem' }}
         >
           <Palette size={18} />
           <span>Diseño</span>
@@ -102,7 +93,6 @@ export const EditorPanel: React.FC<EditorPanelProps> = ({
         <button
           onClick={() => setActiveTab('text')}
           className={`tab-btn ${activeTab === 'text' ? 'active' : ''}`}
-          style={{ flexDirection: 'column', padding: '0.6rem 0.2rem', gap: '4px', fontSize: '0.75rem' }}
         >
           <Type size={18} />
           <span>Textos</span>
@@ -110,7 +100,6 @@ export const EditorPanel: React.FC<EditorPanelProps> = ({
         <button
           onClick={() => setActiveTab('duration')}
           className={`tab-btn ${activeTab === 'duration' ? 'active' : ''}`}
-          style={{ flexDirection: 'column', padding: '0.6rem 0.2rem', gap: '4px', fontSize: '0.75rem' }}
         >
           <Clock size={18} />
           <span>Validez</span>
