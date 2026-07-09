@@ -1,5 +1,4 @@
-import React from 'react';
-import { Sparkles, Download, Layout, Smartphone, Square } from 'lucide-react';
+import { Download, Layout, Smartphone, Square } from 'lucide-react';
 import type { FlyerConfig } from '../types';
 
 interface NavbarProps {
@@ -14,21 +13,18 @@ export const Navbar: React.FC<NavbarProps> = ({ config, setConfig, onDownload, i
     <header className="main-header">
       {/* Brand & Logo */}
       <div className="header-brand">
-        <div style={{
-          width: '42px',
-          height: '42px',
-          borderRadius: '12px',
-          background: 'linear-gradient(135deg, #10b981 0%, #ffd740 100%)',
-          display: 'flex',
-          alignItems: 'center',
-          justifyContent: 'center',
-          color: '#0f172a',
-          fontWeight: 900,
-          boxShadow: '0 4px 12px rgba(16, 185, 129, 0.3)',
-          flexShrink: 0
-        }}>
-          <Sparkles size={24} />
-        </div>
+        <img 
+          src="/logo.png" 
+          alt="FlyerMaker PRO Logo" 
+          style={{
+            width: '42px',
+            height: '42px',
+            borderRadius: '12px',
+            boxShadow: '0 4px 12px rgba(16, 185, 129, 0.3)',
+            flexShrink: 0,
+            objectFit: 'cover'
+          }} 
+        />
         <div>
           <h1 style={{ fontSize: '1.25rem', fontWeight: 800, letterSpacing: '-0.5px', color: '#f8fafc', display: 'flex', alignItems: 'center', gap: '0.5rem', margin: 0 }}>
             FlyerMaker <span style={{ color: '#ffd740', fontSize: '0.8rem', backgroundColor: 'rgba(255, 215, 64, 0.15)', padding: '2px 8px', borderRadius: '20px', border: '1px solid rgba(255, 215, 64, 0.3)' }}>PRO</span>
