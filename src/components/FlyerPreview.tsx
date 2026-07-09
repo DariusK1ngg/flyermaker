@@ -390,20 +390,39 @@ export const FlyerPreview = forwardRef<HTMLDivElement, FlyerPreviewProps>(({ pro
                     padding: products.length <= 2 ? '12px 0' : '4px 0',
                     minHeight: 0
                   }}>
-                    <img
-                      src={product.image}
-                      alt={product.name}
-                      crossOrigin="anonymous"
-                      style={{
-                        maxHeight: imgMaxHeight,
-                        maxWidth: '85%',
-                        objectFit: 'contain',
-                        mixBlendMode: 'multiply'
-                      }}
-                      onError={(e) => {
-                        (e.target as HTMLImageElement).src = 'https://images.unsplash.com/photo-1542838132-92c53300491e?w=600&auto=format&fit=crop&q=80';
-                      }}
-                    />
+                    {product.image ? (
+                      <img
+                        src={product.image}
+                        alt={product.name}
+                        crossOrigin="anonymous"
+                        style={{
+                          maxHeight: imgMaxHeight,
+                          maxWidth: '85%',
+                          objectFit: 'contain',
+                          mixBlendMode: 'multiply'
+                        }}
+                        onError={(e) => {
+                          (e.target as HTMLImageElement).src = 'data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 24 24" fill="none" stroke="%2394a3b8" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect width="18" height="18" x="3" y="3" rx="2" ry="2"/><circle cx="9" cy="9" r="2"/><path d="m21 15-3.086-3.086a2 2 0 0 0-2.828 0L6 21"/></svg>';
+                        }}
+                      />
+                    ) : (
+                      <div style={{
+                        display: 'flex',
+                        flexDirection: 'column',
+                        alignItems: 'center',
+                        justifyContent: 'center',
+                        opacity: 0.3,
+                        color: titleColor,
+                        gap: '4px'
+                      }}>
+                        <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+                          <rect width="18" height="18" x="3" y="3" rx="2" ry="2"/>
+                          <circle cx="9" cy="9" r="2"/>
+                          <path d="m21 15-3.086-3.086a2 2 0 0 0-2.828 0L6 21"/>
+                        </svg>
+                        <span style={{ fontSize: '0.65rem', fontWeight: 800 }}>SIN IMAGEN</span>
+                      </div>
+                    )}
                   </div>
 
                   {/* Bottom Product Info */}

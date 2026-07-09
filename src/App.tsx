@@ -262,6 +262,7 @@ export function App() {
         currentProductIds={products.map(p => p.id)}
         dbProducts={dbProducts}
         onDeleteProduct={handleDeleteProductFromDb}
+        onEditProduct={handleOpenEditModal}
       />
 
       <ProductModal
