@@ -1,7 +1,6 @@
 import { useState, useEffect, useRef } from 'react';
 import { toPng, toJpeg } from 'html-to-image';
 import type { Product, FlyerConfig } from './types';
-import { PREDEFINED_PRODUCTS } from './data/predefinedProducts';
 import { Navbar } from './components/Navbar';
 import { EditorPanel } from './components/EditorPanel';
 import { FlyerPreview } from './components/FlyerPreview';
@@ -9,10 +8,8 @@ import { PredefinedCatalogModal } from './components/PredefinedCatalogModal';
 import { ProductModal } from './components/ProductModal';
 
 export function App() {
-  // Start with the exact 4 products from reference photo
-  const [products, setProducts] = useState<Product[]>(() => {
-    return PREDEFINED_PRODUCTS.slice(0, 4);
-  });
+  // Start with empty array of products
+  const [products, setProducts] = useState<Product[]>([]);
 
   // Neon DB custom products state
   const [dbProducts, setDbProducts] = useState<Product[]>([]);

@@ -118,7 +118,7 @@ export const ProductModal: React.FC<ProductModalProps> = ({
       price: finalPriceStr,
       unit,
       discount: discount === '' ? 0 : discount,
-      image: image || 'https://images.unsplash.com/photo-1542838132-92c53300491e?w=600&auto=format&fit=crop&q=80',
+      image: image || '',
       isHighlighted,
       category: initialProduct?.category || 'frutas'
     });
