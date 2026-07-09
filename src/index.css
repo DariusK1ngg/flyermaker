@@ -458,6 +458,10 @@ input[type=number] {
   gap: 0.75rem;
 }
 
+.mobile-sheet-header {
+  display: none !important;
+}
+
 /* Tablet & Mobile Layout Adaptations */
 @media (max-width: 1024px) {
   .main-content {

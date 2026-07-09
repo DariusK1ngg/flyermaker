@@ -140,7 +140,7 @@ export const ProductModal: React.FC<ProductModalProps> = ({
       display: 'flex',
       alignItems: 'center',
       justifyContent: 'center',
-      zIndex: 100,
+      zIndex: 1100,
       padding: '1rem',
       overflowY: 'auto'
     }}>
@@ -331,7 +331,7 @@ export const ProductModal: React.FC<ProductModalProps> = ({
                 ★ Destacar en Fondo Amarillo
               </span>
               <span style={{ fontSize: '0.75rem', color: '#cbd5e1' }}>
-                Resalta esta tarjeta como en el Aguacate de la foto original
+                Resalta esta tarjeta como en el producto destacado
               </span>
             </div>
             <input

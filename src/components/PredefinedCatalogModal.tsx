@@ -43,7 +43,7 @@ export const PredefinedCatalogModal: React.FC<PredefinedCatalogModalProps> = ({
       display: 'flex',
       alignItems: 'center',
       justifyContent: 'center',
-      zIndex: 100,
+      zIndex: 1100,
       padding: '1rem'
     }}>
       <div className="glass-panel" style={{
